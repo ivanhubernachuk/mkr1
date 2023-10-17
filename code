@@ -1,0 +1,21 @@
+mas = [[87, 69, 23],
+       [45, 57, 16],
+       [71, 18, 91]]
+
+def column_avg(matrix):
+    return [sum(col) / len(col) for col in zip(*matrix)]
+
+def is_sorted(arr):
+    return all(arr[i] <= arr[i+1] for i in range(len(arr) - 1))
+
+while not is_sorted(column_avg(mas)):
+    for n in range(len(mas[0]) - 1):
+        avg_before = column_avg(mas)
+        for k in range(len(mas)):
+            mas[k][n], mas[k][n+1] = mas[k][n+1], mas[k][n]
+        avg_after = column_avg(mas)
+        if is_sorted(avg_after):
+            break
+
+for row in mas:
+    print(row)
